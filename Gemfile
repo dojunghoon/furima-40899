@@ -69,19 +69,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 gem "devise"
 gem "mini_magick"
 gem "image_processing", "~> 1.2"
 gem "active_hash"
-
-group :development do
-  gem 'rubocop', require: false
-end
-
-group :production do
-  gem 'pg'
-end
-
-gem 'pry-rails'
