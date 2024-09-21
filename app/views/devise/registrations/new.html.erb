@@ -7,23 +7,24 @@
       会員情報入力
     </h1>
   </div>
+
   
   <%= render 'shared/error_messages', model: f.object %>
-
+  
 
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">ニックネーム</label>
       <span class="indispensable">必須</span>
     </div>
-    <%= f.text_area :nickname, class:"input-default", id:"nickname", placeholder:"例) furima太郎", maxlength:"40", autofocus: true  %>
+    <%= f.text_area :nickname, class:"input-default", id:"nickname", placeholder:"例) furima太郎", maxlength:"40" %>
   </div>
   <div class="form-group">
     <div class='form-text-wrap'>
       <label class="form-text">メールアドレス</label>
       <span class="indispensable">必須</span>
     </div>
-    <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可" %>
+    <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
   </div>
   <div class="form-group">
     <div class='form-text-wrap'>
@@ -76,9 +77,9 @@
     <div class='input-birth-wrap'>
       <%= raw sprintf(
                   f.date_select(
-                    :date_of_birth,
-                    class:'select-birth', 
-                    id:"date_of_birth",
+                    :birth_date,
+                    class:'select-birth',
+                    id:"birth-date",
                     use_month_numbers: true,
                     prompt:'--',
                     start_year: 1930,
