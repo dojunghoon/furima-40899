@@ -3,25 +3,26 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
-  has_many :items
+  has_many :items 
+  has_many :buyers
 
-  validates :nickname,      presence: true
-  validates :date_of_birth, presence: true
+  validates :nickname, presence: true
 
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
-  validates_format_of :password, with: PASSWORD_REGEX, message: 'is invalid. Include both letters and numbers'
+  VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥々]+\z/
+  validates :last_name, presence: true, format: { with: VALID_NAME_REGEX }
+  validates :first_name, presence: true, format: { with: VALID_NAME_REGEX }
 
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'is invalid. Input full-width characters' } do
-    validates :last_name
-    validates :first_name
-  end
+  # ユーザー本名のフリガナ（全角カタカナ）のバリデーション
+  VALID_KANA_REGEX = /\A[ァ-ヶー－]+\z/
+  validates :last_name_kana, presence: true, format: { with: VALID_KANA_REGEX }
+  validates :first_name_kana, presence: true, format: { with: VALID_KANA_REGEX }
   
-  with_options presence: true, format: { with: /\A[\p{katakana}ー－&&[^ -~｡-ﾟ]]+\z/, message: 'is invalid. Input full-width katakana characters' } do
-    validates :last_name_kana
-    validates :first_name_kana
-  end
+  validates :birth_date, presence: true
+
+  #パスワードに英数字に混合が必要なバリデーション
+  validates :password, format: {
+    with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i,
+  },on: :create
+
 end
