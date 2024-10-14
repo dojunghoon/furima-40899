@@ -87,10 +87,6 @@ gem 'gon'
 
 gem 'pry-rails'
 
-group :production do
-  gem 'unicorn', '6.1.0'
-end
-
 gem "rspec-rails", '~> 4.0.0'
 gem "factory_bot_rails"
 gem "faker"
